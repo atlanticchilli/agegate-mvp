@@ -17,8 +17,8 @@ dist/
 serviceAccountKey*.json
 *-debug.log
 
-# Unused packages for API/dashboard builds (include only what each Dockerfile needs)
-agegate-worker/
+# Note: agegate-worker/ must NOT be excluded - RunPod GitHub builds use repo root context
+# and need agegate-worker/ for the worker Dockerfile. API build ignores it via Dockerfile.
 
 # Large or unnecessary files
 *.mmdb

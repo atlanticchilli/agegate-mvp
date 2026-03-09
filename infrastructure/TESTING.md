@@ -49,7 +49,21 @@ curl -s -X POST "${API_URL}/api/session/create" \
 # Expected: JSON with sessionId, jurisdiction, availableMethods
 ```
 
-## 6. Verify RunPod env vars
+## 6. Test RunPod worker
+
+After deploying the agegate-worker to RunPod, verify it's working:
+
+```bash
+# Test via API (full flow: session → verify → verify-selfie)
+./infrastructure/test-runpod.sh
+
+# Test RunPod endpoint directly (bypasses API)
+RUNPOD_ENDPOINT_ID=your_endpoint_id RUNPOD_API_KEY=your_key ./infrastructure/test-runpod.sh --direct
+```
+
+The script uses a minimal test image. You'll typically see `no_face_detected` (expected) or `pass`/`fail` with a real face. A successful response means the worker is running without the NumPy error.
+
+## 7. Verify RunPod env vars (troubleshooting)
 
 If selfie verification returns `RUNPOD_NOT_CONFIGURED`:
 
@@ -59,7 +73,7 @@ gcloud run services describe agegate-api --project agegate-mvp --region us-centr
 
 Ensure `RUNPOD_ENDPOINT_ID` and `RUNPOD_API_KEY` are set.
 
-## 7. Dashboard API base URL
+## 8. Dashboard API base URL
 
 For the Dashboard embed snippet and logs to work, set `NEXT_PUBLIC_API_BASE_URL` when building:
 

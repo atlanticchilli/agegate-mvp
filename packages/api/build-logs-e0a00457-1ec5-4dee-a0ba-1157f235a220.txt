@@ -1,0 +1,154 @@
+2026-03-09T20:34:03.630Z [INFO] Successfully cloned repository git://github.com/atlanticchilli/agegate-mvp at main
+2026-03-09T20:34:03.631Z [INFO] Creating cache directory.
+2026-03-09T20:34:08.033Z [INFO] Build using docker
+2026-03-09T20:34:08.093Z [INFO] jovial_fermi
+2026-03-09T20:34:08.160Z [INFO] #0 building with "jovial_fermi" instance using docker-container driver
+2026-03-09T20:34:08.160Z [INFO] #1 [internal] booting buildkit
+2026-03-09T20:34:08.311Z [INFO] #1 pulling image moby/buildkit:v0.17.2
+2026-03-09T20:34:09.346Z [INFO] #1 pulling image moby/buildkit:v0.17.2 1.2s done
+2026-03-09T20:34:09.496Z [INFO] #1 creating container buildx_buildkit_jovial_fermi0
+2026-03-09T20:34:09.997Z [INFO] #1 creating container buildx_buildkit_jovial_fermi0 0.7s done
+2026-03-09T20:34:10.237Z [INFO] #1 DONE 1.8s
+2026-03-09T20:34:10.237Z [INFO] #2 [internal] load build definition from Dockerfile
+2026-03-09T20:34:10.237Z [INFO] #2 transferring dockerfile: 1.57kB done
+2026-03-09T20:34:10.237Z [INFO] #2 DONE 0.0s
+2026-03-09T20:34:10.237Z [INFO] #3 [internal] load metadata for docker.io/runpod/pytorch:2.1.0-py3.10-cuda11.8.0-devel-ubuntu22.04
+2026-03-09T20:34:10.655Z [INFO] #3 ...
+2026-03-09T20:34:10.655Z [INFO] #4 [auth] runpod/pytorch:pull token for registry-1.docker.io
+2026-03-09T20:34:10.655Z [INFO] #4 DONE 0.0s
+2026-03-09T20:34:10.805Z [INFO] #3 [internal] load metadata for docker.io/runpod/pytorch:2.1.0-py3.10-cuda11.8.0-devel-ubuntu22.04
+2026-03-09T20:34:11.388Z [INFO] #3 DONE 1.3s
+2026-03-09T20:34:11.587Z [INFO] #5 [internal] load .dockerignore
+2026-03-09T20:34:11.587Z [INFO] #5 transferring context: 407B done
+2026-03-09T20:34:11.587Z [INFO] #5 DONE 0.0s
+2026-03-09T20:34:11.587Z [INFO] #6 [1/7] FROM docker.io/runpod/pytorch:2.1.0-py3.10-cuda11.8.0-devel-ubuntu22.04@sha256:2594f25beeef751aeebcc207ba4c45a382ba174655f01e15cbbfad0e2bdb5ef8
+2026-03-09T20:34:11.587Z [INFO] #6 resolve docker.io/runpod/pytorch:2.1.0-py3.10-cuda11.8.0-devel-ubuntu22.04@sha256:2594f25beeef751aeebcc207ba4c45a382ba174655f01e15cbbfad0e2bdb5ef8 done
+2026-03-09T20:34:11.587Z [INFO] #6 DONE 0.0s
+2026-03-09T20:34:11.587Z [INFO] #7 importing cache manifest from local:2732910660780458769
+2026-03-09T20:34:11.587Z [INFO] #7 inferred cache manifest type: application/vnd.oci.image.index.v1+json done
+2026-03-09T20:34:11.588Z [INFO] #7 DONE 0.0s
+2026-03-09T20:34:11.588Z [INFO] #8 [2/7] WORKDIR /workspace
+2026-03-09T20:34:11.589Z [INFO] #8 sha256:6b851dcae6ca1461dde247915abc5048061f34332929ca8fb37d9dc18f2e2f44 7.34MB / 29.53MB 0.2s
+2026-03-09T20:34:11.740Z [INFO] #8 sha256:6b851dcae6ca1461dde247915abc5048061f34332929ca8fb37d9dc18f2e2f44 12.58MB / 29.53MB 0.3s
+2026-03-09T20:34:11.890Z [INFO] #8 sha256:6b851dcae6ca1461dde247915abc5048061f34332929ca8fb37d9dc18f2e2f44 16.78MB / 29.53MB 0.5s
+2026-03-09T20:34:12.040Z [INFO] #8 sha256:6b851dcae6ca1461dde247915abc5048061f34332929ca8fb37d9dc18f2e2f44 23.07MB / 29.53MB 0.6s
+2026-03-09T20:34:12.189Z [INFO] #8 sha256:6b851dcae6ca1461dde247915abc5048061f34332929ca8fb37d9dc18f2e2f44 28.31MB / 29.53MB 0.8s
+2026-03-09T20:34:12.384Z [INFO] #8 sha256:6b851dcae6ca1461dde247915abc5048061f34332929ca8fb37d9dc18f2e2f44 29.53MB / 29.53MB 0.8s done
+2026-03-09T20:34:12.384Z [INFO] #8 extracting sha256:6b851dcae6ca1461dde247915abc5048061f34332929ca8fb37d9dc18f2e2f44
+2026-03-09T20:34:12.931Z [INFO] #8 extracting sha256:6b851dcae6ca1461dde247915abc5048061f34332929ca8fb37d9dc18f2e2f44 0.7s done
+2026-03-09T20:34:13.087Z [INFO] #8 sha256:4586c00479c64413175c7b90a66073cfd574ca0a9ee099495ba8a58a0819d8b9 2.10MB / 4.62MB 0.2s
+2026-03-09T20:34:13.197Z [INFO] #8 sha256:4586c00479c64413175c7b90a66073cfd574ca0a9ee099495ba8a58a0819d8b9 4.62MB / 4.62MB 0.3s done
+2026-03-09T20:34:13.354Z [INFO] #8 extracting sha256:4586c00479c64413175c7b90a66073cfd574ca0a9ee099495ba8a58a0819d8b9
+2026-03-09T20:34:13.356Z [INFO] #8 extracting sha256:4586c00479c64413175c7b90a66073cfd574ca0a9ee099495ba8a58a0819d8b9 0.2s done
+2026-03-09T20:34:13.516Z [INFO] #8 sha256:4304fa233a80418a848565c712c6ebcb670c1c2d076c419f65f8bf3e49526b08 8.39MB / 56.23MB 0.2s
+2026-03-09T20:34:13.672Z [INFO] #8 sha256:4304fa233a80418a848565c712c6ebcb670c1c2d076c419f65f8bf3e49526b08 14.68MB / 56.23MB 0.3s
+2026-03-09T20:34:13.816Z [INFO] #8 sha256:4304fa233a80418a848565c712c6ebcb670c1c2d076c419f65f8bf3e49526b08 20.97MB / 56.23MB 0.5s
+2026-03-09T20:34:13.966Z [INFO] #8 sha256:4304fa233a80418a848565c712c6ebcb670c1c2d076c419f65f8bf3e49526b08 26.24MB / 56.23MB 0.6s
+2026-03-09T20:34:14.116Z [INFO] #8 sha256:4304fa233a80418a848565c712c6ebcb670c1c2d076c419f65f8bf3e49526b08 33.55MB / 56.23MB 0.8s
+2026-03-09T20:34:14.266Z [INFO] #8 sha256:4304fa233a80418a848565c712c6ebcb670c1c2d076c419f65f8bf3e49526b08 38.80MB / 56.23MB 0.9s
+2026-03-09T20:34:14.416Z [INFO] #8 sha256:4304fa233a80418a848565c712c6ebcb670c1c2d076c419f65f8bf3e49526b08 45.09MB / 56.23MB 1.1s
+2026-03-09T20:34:14.566Z [INFO] #8 sha256:4304fa233a80418a848565c712c6ebcb670c1c2d076c419f65f8bf3e49526b08 51.38MB / 56.23MB 1.2s
+2026-03-09T20:34:14.716Z [INFO] #8 sha256:4304fa233a80418a848565c712c6ebcb670c1c2d076c419f65f8bf3e49526b08 56.23MB / 56.23MB 1.4s
+2026-03-09T20:34:14.881Z [INFO] #8 sha256:4304fa233a80418a848565c712c6ebcb670c1c2d076c419f65f8bf3e49526b08 56.23MB / 56.23MB 1.4s done
+2026-03-09T20:34:14.881Z [INFO] #8 extracting sha256:4304fa233a80418a848565c712c6ebcb670c1c2d076c419f65f8bf3e49526b08
+2026-03-09T20:34:15.339Z [INFO] #8 extracting sha256:4304fa233a80418a848565c712c6ebcb670c1c2d076c419f65f8bf3e49526b08 0.6s done
+2026-03-09T20:34:15.355Z [INFO] #8 CANCELED
+2026-03-09T20:34:15.355Z [INFO] #9 [internal] load build context
+2026-03-09T20:34:15.356Z [INFO] #9 transferring context: 2B done
+2026-03-09T20:34:15.356Z [INFO] #9 DONE 3.9s
+2026-03-09T20:34:15.356Z [INFO] #10 [3/7] RUN pip install --no-cache-dir runpod ultralytics Pillow "numpy>=1.21.0,<2" opencv-python-headless
+2026-03-09T20:34:15.356Z [INFO] #10 CACHED
+2026-03-09T20:34:15.356Z [INFO] #11 [4/7] RUN pip install --no-cache-dir "setuptools<74"     && pip install --no-cache-dir --no-build-isolation "mivolo @ git+https://github.com/WildChlamydia/MiVOLO.git"
+2026-03-09T20:34:15.356Z [INFO] #11 CACHED
+2026-03-09T20:34:15.356Z [INFO] #12 [5/7] COPY agegate-worker/scripts/download_models.sh scripts/
+2026-03-09T20:34:15.356Z [INFO] #12 ERROR: failed to calculate checksum of ref eodpct3c94na0q8hhc1u9rk6n::upx9f8bheupr5yn0piuo5drgf: "/agegate-worker/scripts/download_models.sh": not found
+2026-03-09T20:34:15.356Z [INFO] #13 [6/7] RUN chmod +x scripts/download_models.sh     && MODELS_DIR=/workspace/models SFAS_DIR=/workspace/Silent-Face-Anti-Spoofing ./scripts/download_models.sh
+2026-03-09T20:34:15.356Z [INFO] #13 CACHED
+2026-03-09T20:34:15.356Z [INFO] #14 [7/7] COPY agegate-worker/src/ src/
+2026-03-09T20:34:15.356Z [INFO] #14 ERROR: failed to calculate checksum of ref eodpct3c94na0q8hhc1u9rk6n::upx9f8bheupr5yn0piuo5drgf: "/agegate-worker/src": not found
+2026-03-09T20:34:15.356Z [INFO] ------
+2026-03-09T20:34:15.356Z [INFO]  > [5/7] COPY agegate-worker/scripts/download_models.sh scripts/:
+2026-03-09T20:34:15.357Z [INFO] ------
+2026-03-09T20:34:15.357Z [INFO]  > [7/7] COPY agegate-worker/src/ src/:
+2026-03-09T20:34:15.357Z [INFO] WARNING: current commit information was not captured by the build: git was not found in the system: exec: "git": executable file not found in $PATH
+2026-03-09T20:34:15.357Z [INFO] Dockerfile:18
+2026-03-09T20:34:15.357Z [INFO] --------------------
+2026-03-09T20:34:15.357Z [INFO]   16 |     # Download models (MiVOLO, YOLO, SFAS clone)
+2026-03-09T20:34:15.357Z [INFO]   17 |     # Paths use agegate-worker/ prefix when build context is repo root (e.g. RunPod GitHub integration)
+2026-03-09T20:34:15.358Z [INFO]   18 | >>> COPY agegate-worker/scripts/download_models.sh scripts/
+2026-03-09T20:34:15.358Z [INFO]   19 |     RUN chmod +x scripts/download_models.sh \
+2026-03-09T20:34:15.358Z [INFO]   20 |         && MODELS_DIR=/workspace/models SFAS_DIR=/workspace/Silent-Face-Anti-Spoofing ./scripts/download_models.sh
+2026-03-09T20:34:15.358Z [INFO] --------------------
+2026-03-09T20:34:15.359Z [ERROR] ERROR: failed to build: failed to solve: failed to compute cache key: failed to calculate checksum of ref eodpct3c94na0q8hhc1u9rk6n::upx9f8bheupr5yn0piuo5drgf: "/agegate-worker/scripts/download_models.sh": not found
+2026-03-09T20:34:15.370Z [ERROR] Build failed in the first attempt. Will retry one more time before exiting.
+2026-03-09T20:34:15.434Z [INFO] dazzling_meninsky
+2026-03-09T20:34:15.500Z [INFO] #0 building with "dazzling_meninsky" instance using docker-container driver
+2026-03-09T20:34:15.500Z [INFO] #1 [internal] booting buildkit
+2026-03-09T20:34:15.651Z [INFO] #1 pulling image moby/buildkit:v0.17.2
+2026-03-09T20:34:16.643Z [INFO] #1 pulling image moby/buildkit:v0.17.2 1.1s done
+2026-03-09T20:34:16.793Z [INFO] #1 creating container buildx_buildkit_dazzling_meninsky0
+2026-03-09T20:34:17.237Z [INFO] #1 creating container buildx_buildkit_dazzling_meninsky0 0.6s done
+2026-03-09T20:34:17.460Z [INFO] #1 DONE 1.7s
+2026-03-09T20:34:17.460Z [INFO] #2 [internal] load build definition from Dockerfile
+2026-03-09T20:34:17.460Z [INFO] #2 transferring dockerfile: 1.57kB done
+2026-03-09T20:34:17.460Z [INFO] #2 DONE 0.0s
+2026-03-09T20:34:17.460Z [INFO] #3 [internal] load metadata for docker.io/runpod/pytorch:2.1.0-py3.10-cuda11.8.0-devel-ubuntu22.04
+2026-03-09T20:34:17.860Z [INFO] #3 ...
+2026-03-09T20:34:17.860Z [INFO] #4 [auth] runpod/pytorch:pull token for registry-1.docker.io
+2026-03-09T20:34:17.860Z [INFO] #4 DONE 0.0s
+2026-03-09T20:34:18.011Z [INFO] #3 [internal] load metadata for docker.io/runpod/pytorch:2.1.0-py3.10-cuda11.8.0-devel-ubuntu22.04
+2026-03-09T20:34:18.599Z [INFO] #3 DONE 1.3s
+2026-03-09T20:34:18.781Z [INFO] #5 [internal] load .dockerignore
+2026-03-09T20:34:18.781Z [INFO] #5 transferring context: 407B done
+2026-03-09T20:34:18.781Z [INFO] #5 DONE 0.0s
+2026-03-09T20:34:18.781Z [INFO] #6 [1/7] FROM docker.io/runpod/pytorch:2.1.0-py3.10-cuda11.8.0-devel-ubuntu22.04@sha256:2594f25beeef751aeebcc207ba4c45a382ba174655f01e15cbbfad0e2bdb5ef8
+2026-03-09T20:34:18.781Z [INFO] #6 resolve docker.io/runpod/pytorch:2.1.0-py3.10-cuda11.8.0-devel-ubuntu22.04@sha256:2594f25beeef751aeebcc207ba4c45a382ba174655f01e15cbbfad0e2bdb5ef8 done
+2026-03-09T20:34:18.781Z [INFO] #6 DONE 0.0s
+2026-03-09T20:34:18.781Z [INFO] #7 importing cache manifest from local:2732910660780458769
+2026-03-09T20:34:18.782Z [INFO] #7 inferred cache manifest type: application/vnd.oci.image.index.v1+json done
+2026-03-09T20:34:18.782Z [INFO] #7 DONE 0.0s
+2026-03-09T20:34:18.782Z [INFO] #8 [2/7] WORKDIR /workspace
+2026-03-09T20:34:18.784Z [INFO] #8 sha256:6b851dcae6ca1461dde247915abc5048061f34332929ca8fb37d9dc18f2e2f44 14.68MB / 29.53MB 0.2s
+2026-03-09T20:34:18.934Z [INFO] #8 sha256:6b851dcae6ca1461dde247915abc5048061f34332929ca8fb37d9dc18f2e2f44 26.21MB / 29.53MB 0.3s
+2026-03-09T20:34:19.152Z [INFO] #8 sha256:6b851dcae6ca1461dde247915abc5048061f34332929ca8fb37d9dc18f2e2f44 29.53MB / 29.53MB 0.4s done
+2026-03-09T20:34:19.152Z [INFO] #8 extracting sha256:6b851dcae6ca1461dde247915abc5048061f34332929ca8fb37d9dc18f2e2f44
+2026-03-09T20:34:19.576Z [INFO] #8 extracting sha256:6b851dcae6ca1461dde247915abc5048061f34332929ca8fb37d9dc18f2e2f44 0.6s done
+2026-03-09T20:34:19.810Z [INFO] #8 sha256:4586c00479c64413175c7b90a66073cfd574ca0a9ee099495ba8a58a0819d8b9 4.62MB / 4.62MB 0.1s done
+2026-03-09T20:34:19.810Z [INFO] #8 extracting sha256:4586c00479c64413175c7b90a66073cfd574ca0a9ee099495ba8a58a0819d8b9
+2026-03-09T20:34:20.131Z [INFO] #8 extracting sha256:4586c00479c64413175c7b90a66073cfd574ca0a9ee099495ba8a58a0819d8b9 0.5s done
+2026-03-09T20:34:20.288Z [INFO] #8 sha256:4304fa233a80418a848565c712c6ebcb670c1c2d076c419f65f8bf3e49526b08 12.58MB / 56.23MB 0.2s
+2026-03-09T20:34:20.439Z [INFO] #8 sha256:4304fa233a80418a848565c712c6ebcb670c1c2d076c419f65f8bf3e49526b08 27.26MB / 56.23MB 0.3s
+2026-03-09T20:34:20.588Z [INFO] #8 sha256:4304fa233a80418a848565c712c6ebcb670c1c2d076c419f65f8bf3e49526b08 47.19MB / 56.23MB 0.5s
+2026-03-09T20:34:20.703Z [INFO] #8 sha256:4304fa233a80418a848565c712c6ebcb670c1c2d076c419f65f8bf3e49526b08 56.23MB / 56.23MB 0.6s done
+2026-03-09T20:34:20.854Z [INFO] #8 extracting sha256:4304fa233a80418a848565c712c6ebcb670c1c2d076c419f65f8bf3e49526b08
+2026-03-09T20:34:21.316Z [INFO] #8 extracting sha256:4304fa233a80418a848565c712c6ebcb670c1c2d076c419f65f8bf3e49526b08 0.6s done
+2026-03-09T20:34:21.330Z [INFO] #8 CANCELED
+2026-03-09T20:34:21.330Z [INFO] #9 [internal] load build context
+2026-03-09T20:34:21.330Z [INFO] #9 transferring context: 2B done
+2026-03-09T20:34:21.330Z [INFO] #9 DONE 2.7s
+2026-03-09T20:34:21.330Z [INFO] #10 [4/7] RUN pip install --no-cache-dir "setuptools<74"     && pip install --no-cache-dir --no-build-isolation "mivolo @ git+https://github.com/WildChlamydia/MiVOLO.git"
+2026-03-09T20:34:21.330Z [INFO] #10 CACHED
+2026-03-09T20:34:21.330Z [INFO] #11 [3/7] RUN pip install --no-cache-dir runpod ultralytics Pillow "numpy>=1.21.0,<2" opencv-python-headless
+2026-03-09T20:34:21.331Z [INFO] #11 CACHED
+2026-03-09T20:34:21.331Z [INFO] #12 [5/7] COPY agegate-worker/scripts/download_models.sh scripts/
+2026-03-09T20:34:21.331Z [INFO] #12 ERROR: failed to calculate checksum of ref r7dbdz2i0kcr79naew12tx6yl::luak69uznp7lmlbmgegdoj5cz: "/agegate-worker/scripts/download_models.sh": not found
+2026-03-09T20:34:21.331Z [INFO] #13 [6/7] RUN chmod +x scripts/download_models.sh     && MODELS_DIR=/workspace/models SFAS_DIR=/workspace/Silent-Face-Anti-Spoofing ./scripts/download_models.sh
+2026-03-09T20:34:21.331Z [INFO] #13 CACHED
+2026-03-09T20:34:21.331Z [INFO] #14 [7/7] COPY agegate-worker/src/ src/
+2026-03-09T20:34:21.331Z [INFO] #14 ERROR: failed to calculate checksum of ref r7dbdz2i0kcr79naew12tx6yl::luak69uznp7lmlbmgegdoj5cz: "/agegate-worker/src": not found
+2026-03-09T20:34:21.331Z [INFO] ------
+2026-03-09T20:34:21.331Z [INFO]  > [5/7] COPY agegate-worker/scripts/download_models.sh scripts/:
+2026-03-09T20:34:21.331Z [INFO]  > [7/7] COPY agegate-worker/src/ src/:
+2026-03-09T20:34:21.331Z [INFO] WARNING: current commit information was not captured by the build: git was not found in the system: exec: "git": executable file not found in $PATH
+2026-03-09T20:34:21.331Z [INFO] Dockerfile:18
+2026-03-09T20:34:21.331Z [INFO] --------------------
+2026-03-09T20:34:21.332Z [INFO]   16 |     # Download models (MiVOLO, YOLO, SFAS clone)
+2026-03-09T20:34:21.332Z [INFO]   17 |     # Paths use agegate-worker/ prefix when build context is repo root (e.g. RunPod GitHub integration)
+2026-03-09T20:34:21.332Z [INFO]   18 | >>> COPY agegate-worker/scripts/download_models.sh scripts/
+2026-03-09T20:34:21.332Z [INFO]   19 |     RUN chmod +x scripts/download_models.sh \
+2026-03-09T20:34:21.332Z [INFO]   20 |         && MODELS_DIR=/workspace/models SFAS_DIR=/workspace/Silent-Face-Anti-Spoofing ./scripts/download_models.sh
+2026-03-09T20:34:21.332Z [INFO] --------------------
+2026-03-09T20:34:21.333Z [ERROR] ERROR: failed to build: failed to solve: failed to compute cache key: failed to calculate checksum of ref r7dbdz2i0kcr79naew12tx6yl::luak69uznp7lmlbmgegdoj5cz: "/agegate-worker/scripts/download_models.sh": not found
+2026-03-09T20:34:21.341Z [ERROR] Build finished with wrong exit code: Please view the logs to find out what went wrong.
+2026-03-09T20:34:21.358Z [ERROR] None
+None
