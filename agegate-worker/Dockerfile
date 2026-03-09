@@ -13,12 +13,13 @@ RUN pip install --no-cache-dir "setuptools<74" \
     && pip install --no-cache-dir --no-build-isolation "mivolo @ git+https://github.com/WildChlamydia/MiVOLO.git"
 
 # Download models (MiVOLO, YOLO, SFAS clone)
-COPY scripts/download_models.sh scripts/
+# Paths use agegate-worker/ prefix when build context is repo root (e.g. RunPod GitHub integration)
+COPY agegate-worker/scripts/download_models.sh scripts/
 RUN chmod +x scripts/download_models.sh \
     && MODELS_DIR=/workspace/models SFAS_DIR=/workspace/Silent-Face-Anti-Spoofing ./scripts/download_models.sh
 
 # Copy worker source
-COPY src/ src/
+COPY agegate-worker/src/ src/
 
 ENV SFAS_ROOT=/workspace/Silent-Face-Anti-Spoofing
 ENV YOLO_WEIGHTS=/workspace/models/yolov8x_person_face.pt

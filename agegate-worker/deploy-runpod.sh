@@ -10,7 +10,10 @@ IMAGE_TAG="${IMAGE_TAG:-v0.1}"
 FULL_IMAGE="${DOCKERHUB_USER}/${IMAGE_NAME}:${IMAGE_TAG}"
 
 echo "=== Step 1: Build (if not already built) ==="
-docker build --platform linux/amd64 -t "${IMAGE_NAME}:${IMAGE_TAG}" .
+# Build from repo root so context matches RunPod (Dockerfile expects agegate-worker/ paths)
+SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+ROOT_DIR="$(cd "${SCRIPT_DIR}/.." && pwd)"
+docker build --platform linux/amd64 -f "${SCRIPT_DIR}/Dockerfile" -t "${IMAGE_NAME}:${IMAGE_TAG}" "${ROOT_DIR}"
 docker tag "${IMAGE_NAME}:${IMAGE_TAG}" "${FULL_IMAGE}"
 
 echo ""

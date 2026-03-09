@@ -71,7 +71,8 @@ steps:
           --region "${_REGION}" \
           --platform managed \
           --allow-unauthenticated \
-          --image "${_REGION}-docker.pkg.dev/${_PROJECT_ID}/${_REPOSITORY}/api:${SHORT_SHA}"
+          --image "${_REGION}-docker.pkg.dev/${_PROJECT_ID}/${_REPOSITORY}/api:${SHORT_SHA}" \
+          --quiet
 
   - id: build-dashboard-image
     name: gcr.io/cloud-builders/docker
@@ -110,7 +111,8 @@ steps:
           --region "${_REGION}" \
           --platform managed \
           --allow-unauthenticated \
-          --image "${_REGION}-docker.pkg.dev/${_PROJECT_ID}/${_REPOSITORY}/dashboard:${SHORT_SHA}"
+          --image "${_REGION}-docker.pkg.dev/${_PROJECT_ID}/${_REPOSITORY}/dashboard:${SHORT_SHA}" \
+          --quiet
 
   - id: build-widget
     name: gcr.io/cloud-builders/npm
