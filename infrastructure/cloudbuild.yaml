@@ -41,8 +41,11 @@ steps:
       - -lc
       - |
         set -euo pipefail
+        CACHE_IMG="${_REGION}-docker.pkg.dev/${_PROJECT_ID}/${_REPOSITORY}/api:latest"
+        docker pull "$${CACHE_IMG}" || true
         docker build \
           -f packages/api/Dockerfile \
+          --cache-from "$${CACHE_IMG}" \
           -t ${_REGION}-docker.pkg.dev/${_PROJECT_ID}/${_REPOSITORY}/api:${SHORT_SHA} \
           -t ${_REGION}-docker.pkg.dev/${_PROJECT_ID}/${_REPOSITORY}/api:latest \
           .
@@ -81,8 +84,11 @@ steps:
       - -lc
       - |
         set -euo pipefail
+        CACHE_IMG="${_REGION}-docker.pkg.dev/${_PROJECT_ID}/${_REPOSITORY}/dashboard:latest"
+        docker pull "$${CACHE_IMG}" || true
         docker build \
           -f packages/dashboard/Dockerfile \
+          --cache-from "$${CACHE_IMG}" \
           -t ${_REGION}-docker.pkg.dev/${_PROJECT_ID}/${_REPOSITORY}/dashboard:${SHORT_SHA} \
           -t ${_REGION}-docker.pkg.dev/${_PROJECT_ID}/${_REPOSITORY}/dashboard:latest \
           .

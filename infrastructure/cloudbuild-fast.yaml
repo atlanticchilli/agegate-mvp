@@ -1,0 +1,142 @@
+# Optimized Cloud Build: parallel steps + larger machine
+# Use: gcloud builds submit --config=infrastructure/cloudbuild-fast.yaml --substitutions=SHORT_SHA=xxx .
+
+substitutions:
+  _PROJECT_ID: agegate-mvp
+  _REGION: us-central1
+  _REPOSITORY: agegate-images
+  _API_SERVICE: agegate-api
+  _DASHBOARD_SERVICE: agegate-dashboard
+  _WIDGET_BUCKET: agegate-mvp-widget-cdn
+  _WIDGET_OBJECT: v1/widget.js
+
+options:
+  logging: CLOUD_LOGGING_ONLY
+  machineType: E2_HIGHCPU_8  # 8 vCPUs (default is 1) - faster npm/docker
+
+steps:
+  - id: install-deps
+    name: gcr.io/cloud-builders/npm
+    entrypoint: bash
+    args:
+      - -lc
+      - |
+        set -euo pipefail
+        npm ci
+
+  - id: build-shared
+    name: gcr.io/cloud-builders/npm
+    entrypoint: bash
+    waitFor: [install-deps]
+    args:
+      - -lc
+      - |
+        set -euo pipefail
+        npm run build --workspace=packages/shared
+
+  # === PARALLEL: API + Dashboard + Widget (all after build-shared) ===
+  - id: build-api-image
+    name: gcr.io/cloud-builders/docker
+    waitFor: [build-shared]
+    entrypoint: bash
+    args:
+      - -lc
+      - |
+        set -euo pipefail
+        CACHE_IMG="${_REGION}-docker.pkg.dev/${_PROJECT_ID}/${_REPOSITORY}/api:latest"
+        docker pull "$${CACHE_IMG}" || true
+        docker build -f packages/api/Dockerfile --cache-from "$${CACHE_IMG}" \
+          -t ${_REGION}-docker.pkg.dev/${_PROJECT_ID}/${_REPOSITORY}/api:${SHORT_SHA} \
+          -t ${_REGION}-docker.pkg.dev/${_PROJECT_ID}/${_REPOSITORY}/api:latest .
+
+  - id: build-dashboard-image
+    name: gcr.io/cloud-builders/docker
+    waitFor: [build-shared]
+    entrypoint: bash
+    args:
+      - -lc
+      - |
+        set -euo pipefail
+        CACHE_IMG="${_REGION}-docker.pkg.dev/${_PROJECT_ID}/${_REPOSITORY}/dashboard:latest"
+        docker pull "$${CACHE_IMG}" || true
+        docker build -f packages/dashboard/Dockerfile --cache-from "$${CACHE_IMG}" \
+          -t ${_REGION}-docker.pkg.dev/${_PROJECT_ID}/${_REPOSITORY}/dashboard:${SHORT_SHA} \
+          -t ${_REGION}-docker.pkg.dev/${_PROJECT_ID}/${_REPOSITORY}/dashboard:latest .
+
+  - id: build-widget
+    name: gcr.io/cloud-builders/npm
+    waitFor: [build-shared]
+    entrypoint: bash
+    args:
+      - -lc
+      - |
+        set -euo pipefail
+        npm run build --workspace=packages/widget
+
+  # === PARALLEL: Push both images ===
+  - id: push-api
+    name: gcr.io/cloud-builders/docker
+    waitFor: [build-api-image]
+    entrypoint: bash
+    args:
+      - -lc
+      - |
+        docker push ${_REGION}-docker.pkg.dev/${_PROJECT_ID}/${_REPOSITORY}/api:${SHORT_SHA}
+        docker push ${_REGION}-docker.pkg.dev/${_PROJECT_ID}/${_REPOSITORY}/api:latest
+
+  - id: push-dashboard
+    name: gcr.io/cloud-builders/docker
+    waitFor: [build-dashboard-image]
+    entrypoint: bash
+    args:
+      - -lc
+      - |
+        docker push ${_REGION}-docker.pkg.dev/${_PROJECT_ID}/${_REPOSITORY}/dashboard:${SHORT_SHA}
+        docker push ${_REGION}-docker.pkg.dev/${_PROJECT_ID}/${_REPOSITORY}/dashboard:latest
+
+  # === PARALLEL: Deploy both services ===
+  - id: deploy-api
+    name: gcr.io/google.com/cloudsdktool/cloud-sdk
+    waitFor: [push-api]
+    entrypoint: gcloud
+    args:
+      - run
+      - deploy
+      - ${_API_SERVICE}
+      - --project=${_PROJECT_ID}
+      - --region=${_REGION}
+      - --platform=managed
+      - --allow-unauthenticated
+      - --image=${_REGION}-docker.pkg.dev/${_PROJECT_ID}/${_REPOSITORY}/api:${SHORT_SHA}
+      - --quiet
+
+  - id: deploy-dashboard
+    name: gcr.io/google.com/cloudsdktool/cloud-sdk
+    waitFor: [push-dashboard]
+    entrypoint: gcloud
+    args:
+      - run
+      - deploy
+      - ${_DASHBOARD_SERVICE}
+      - --project=${_PROJECT_ID}
+      - --region=${_REGION}
+      - --platform=managed
+      - --allow-unauthenticated
+      - --image=${_REGION}-docker.pkg.dev/${_PROJECT_ID}/${_REPOSITORY}/dashboard:${SHORT_SHA}
+      - --quiet
+
+  # === Widget upload (after build-widget) ===
+  - id: upload-widget
+    name: gcr.io/google.com/cloudsdktool/cloud-sdk
+    waitFor: [build-widget]
+    entrypoint: bash
+    args:
+      - -lc
+      - |
+        gcloud storage cp packages/widget/dist/widget.js gs://${_WIDGET_BUCKET}/${_WIDGET_OBJECT}
+
+images:
+  - ${_REGION}-docker.pkg.dev/${_PROJECT_ID}/${_REPOSITORY}/api:${SHORT_SHA}
+  - ${_REGION}-docker.pkg.dev/${_PROJECT_ID}/${_REPOSITORY}/api:latest
+  - ${_REGION}-docker.pkg.dev/${_PROJECT_ID}/${_REPOSITORY}/dashboard:${SHORT_SHA}
+  - ${_REGION}-docker.pkg.dev/${_PROJECT_ID}/${_REPOSITORY}/dashboard:latest

@@ -32,6 +32,25 @@ function toTimestamp(): { seconds: number; nanoseconds: number } {
 }
 
 router.post("/", async (req, res) => {
+  try {
+    await handleVerifySelfie(req, res);
+  } catch (err) {
+    const message = err instanceof Error ? err.message : String(err);
+    const stack = err instanceof Error ? err.stack : undefined;
+    console.error("[verify-selfie] Unhandled error:", message, stack);
+    res.status(500).json({
+      pass: false,
+      error: "Verification failed",
+      error_code: "INTERNAL_ERROR",
+      details: process.env.NODE_ENV === "development" ? message : undefined
+    });
+  }
+});
+
+async function handleVerifySelfie(
+  req: import("express").Request,
+  res: import("express").Response
+): Promise<void> {
   const { sessionId, image, min_age, buffer } = req.body as {
     sessionId?: string;
     image?: string;
@@ -123,9 +142,22 @@ router.post("/", async (req, res) => {
       return;
     }
 
-    runPodResponse = (await runResp.json()) as RunPodResponse;
+    const responseText = await runResp.text();
+    try {
+      runPodResponse = JSON.parse(responseText) as RunPodResponse;
+    } catch (parseErr) {
+      const msg = parseErr instanceof Error ? parseErr.message : "Unknown";
+      console.error("[verify-selfie] RunPod response parse error:", msg);
+      res.status(502).json({
+        pass: false,
+        error: `RunPod response invalid: ${msg}`,
+        error_code: "RUNPOD_PARSE_ERROR"
+      });
+      return;
+    }
   } catch (err) {
     const message = err instanceof Error ? err.message : "Unknown error";
+    console.error("[verify-selfie] RunPod request failed:", message);
     res.status(502).json({
       pass: false,
       error: `RunPod request failed: ${message}`,
@@ -167,14 +199,25 @@ router.post("/", async (req, res) => {
 
   let token: string | undefined;
   if (pass) {
+    const secretKey = site.secretKey;
+    const validityPeriod = site.verificationValidityPeriod ?? 86400;
+    if (!secretKey || typeof secretKey !== "string") {
+      console.error("[verify-selfie] Site missing secretKey:", site.id);
+      res.status(500).json({
+        pass: false,
+        error: "Site configuration error",
+        error_code: "SITE_CONFIG_ERROR"
+      });
+      return;
+    }
     token = signVerificationToken({
-      siteSecretKey: site.secretKey,
+      siteSecretKey: secretKey,
       sessionId,
       siteId: session.siteId,
       jurisdiction: session.jurisdiction,
       method: "facial_age_estimation",
       ageCategory: "adult",
-      verificationValidityPeriodSeconds: site.verificationValidityPeriod
+      verificationValidityPeriodSeconds: validityPeriod
     });
   }
 

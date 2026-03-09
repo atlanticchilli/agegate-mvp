@@ -20,9 +20,10 @@ echo "  PROJECT_ID=${PROJECT_ID}  TAG=${TAG}"
 
 cd "$(dirname "$0")/.."
 
+# API only (dashboard lives on Vercel)
 gcloud builds submit \
   --project "${PROJECT_ID}" \
-  --config infrastructure/cloudbuild.yaml \
+  --config infrastructure/cloudbuild-api-only.yaml \
   --substitutions="SHORT_SHA=${TAG}" \
   .
 

@@ -1,0 +1,25 @@
+# Reduce Docker build context - exclude bloat
+node_modules/
+.git/
+.gitignore
+*.md
+!README.md
+
+# Build outputs
+dist/
+.next/
+*.tsbuildinfo
+
+# Environment and secrets
+.env
+.env.*
+.firebase/
+serviceAccountKey*.json
+*-debug.log
+
+# Unused packages for API/dashboard builds (include only what each Dockerfile needs)
+agegate-worker/
+
+# Large or unnecessary files
+*.mmdb
+tt

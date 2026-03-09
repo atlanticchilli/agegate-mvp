@@ -8,7 +8,8 @@ WORKDIR /workspace
 
 # Install deps (base has torch, torchvision; add runpod, ultralytics, mivolo)
 # mivolo setup.py imports pkg_resources - need setuptools<74 and --no-build-isolation
-RUN pip install --no-cache-dir runpod ultralytics Pillow numpy opencv-python-headless
+# Pin numpy<2: PyTorch/Ultralytics compiled for NumPy 1.x; NumPy 2 causes "Numpy is not available"
+RUN pip install --no-cache-dir runpod ultralytics Pillow "numpy>=1.21.0,<2" opencv-python-headless
 RUN pip install --no-cache-dir "setuptools<74" \
     && pip install --no-cache-dir --no-build-isolation "mivolo @ git+https://github.com/WildChlamydia/MiVOLO.git"
 

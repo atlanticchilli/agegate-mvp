@@ -8,7 +8,12 @@ RUN npm ci
 FROM node:20-slim AS build
 WORKDIR /app
 COPY --from=deps /app/node_modules ./node_modules
-COPY . .
+COPY package*.json ./
+COPY packages/dashboard packages/dashboard
+COPY packages/shared packages/shared
+# Minimal package.json for workspace resolution
+COPY packages/api/package.json packages/api/
+COPY packages/widget/package.json packages/widget/
 RUN npm run build --workspace=packages/dashboard
 
 FROM node:20-slim AS runtime

@@ -20,6 +20,21 @@ export function createApp() {
     res.json({ ok: true });
   });
 
+  app.get("/demo", (req, res) => {
+    const siteKey = (req.query.siteKey as string) ?? "";
+    const widgetUrl = "https://storage.googleapis.com/agegate-mvp-widget-cdn/v1/widget.js";
+    const html = `<!DOCTYPE html>
+<html>
+<head><meta charset="utf-8"><title>AgeGate Demo</title></head>
+<body>
+  <h1>AgeGate Selfie Verification Demo</h1>
+  <p>${siteKey ? `Testing site: <code>${siteKey}</code>` : "Add ?siteKey=YOUR_SITE_KEY to the URL (create a site in the Dashboard first)."}</p>
+  ${siteKey ? `<script src="${widgetUrl}" data-site-key="${siteKey}" data-api-base-path="/api/session"></script>` : ""}
+</body>
+</html>`;
+    res.type("html").send(html);
+  });
+
   app.use("/api/session", sessionRoutes);
   app.use("/api/verify-selfie", verifySelfieRoutes);
   app.use("/api/callback", callbackRouter);

@@ -1,0 +1,87 @@
+2026-03-09  16:21:33.946 | info | j2gmy15o1onjlv | Finished.
+2026-03-09  16:21:33.946 | error | j2gmy15o1onjlv | {\n    "error_type": "<class 'RuntimeError'>",\n    "error_message": "Numpy is not available",\n    "error_traceback": "Traceback (most recent call last):\n  File \"/usr/local/lib/python3.10/dist-packages/runpod/serverless/modules/rp_job.py\", line 182, in run_job\n    handler_return = handler(job)\n  File \"/workspace/src/handler.py\", line 23, in handler\n    result = verify_age(\n  File \"/workspace/src/pipeline.py\", line 76, in verify_age\n    face_bbox, person_bbox = detect_faces(image, YOLO_WEIGHTS, device=DEVICE)\n  File \"/workspace/src/models/detector.py\", line 23, in detect_faces\n    results = model.predict(image, conf=conf_thresh, device=device, verbose=False)\n  File \"/usr/local/lib/python3.10/dist-packages/ultralytics/engine/model.py\", line 274, in predict\n    return self.predictor.predict_cli(source=source) if is_cli else self.predictor(source=source, stream=stream)\n  File \"/usr/local/lib/python3.10/dist-packages/ultralytics/engine/predictor.py\", line 204, in __call__\n    return list(self.stream_inference(source, model, *args, **kwargs))  # merge list of Result into one\n  File \"/usr/local/lib/python3.10/dist-packages/torch/utils/_contextlib.py\", line 35, in generator_context\n    response = gen.send(None)\n  File \"/usr/local/lib/python3.10/dist-packages/ultralytics/engine/predictor.py\", line 279, in stream_inference\n    im = self.preprocess(im0s)\n  File \"/usr/local/lib/python3.10/dist-packages/ultralytics/engine/predictor.py\", line 125, in preprocess\n    im = torch.from_numpy(im)\nRuntimeError: Numpy is not available\n",\n    "hostname": "j2gmy15o1onjlv-64411019",\n    "worker_id": "j2gmy15o1onjlv",\n    "runpod_version": "1.8.1"\n}
+2026-03-09  16:21:33.651 | error | j2gmy15o1onjlv | Captured Handler Exception
+2026-03-09  16:21:33.651 | info | j2gmy15o1onjlv | \n
+2026-03-09  16:21:33.651 | info | j2gmy15o1onjlv | [31m[1mrequirements:[0m ⚠️ [1mRestart runtime or rerun command for updates to take effect[0m\n
+2026-03-09  16:21:33.651 | info | j2gmy15o1onjlv | [31m[1mrequirements:[0m AutoUpdate success ✅ 3.7s, installed 1 package: ['omegaconf']\n
+2026-03-09  16:21:33.651 | info | j2gmy15o1onjlv | \n
+2026-03-09  16:21:33.651 | info | j2gmy15o1onjlv | Successfully installed antlr4-python3-runtime-4.9.3 omegaconf-2.3.0\n
+2026-03-09  16:21:33.651 | info | j2gmy15o1onjlv | Installing collected packages: antlr4-python3-runtime, omegaconf\n
+2026-03-09  16:21:33.651 | info | j2gmy15o1onjlv | Successfully built antlr4-python3-runtime\n
+2026-03-09  16:21:33.651 | info | j2gmy15o1onjlv |   Stored in directory: /tmp/pip-ephem-wheel-cache-4l0300ww/wheels/12/93/dd/1f6a127edc45659556564c5730f6d4e300888f4bca2d4c5a88\n
+2026-03-09  16:21:33.651 | info | j2gmy15o1onjlv |   Created wheel for antlr4-python3-runtime: filename=antlr4_python3_runtime-4.9.3-py3-none-any.whl size=144555 sha256=4071509628fca2940a9e8cba77bd05230c1c1812f750ae45d928e84cd30b453d\n
+2026-03-09  16:21:33.651 | info | j2gmy15o1onjlv |   Building wheel for antlr4-python3-runtime (setup.py): finished with status 'done'\n
+2026-03-09  16:21:33.651 | info | j2gmy15o1onjlv |   Building wheel for antlr4-python3-runtime (setup.py): started\n
+2026-03-09  16:21:33.651 | info | j2gmy15o1onjlv | Building wheels for collected packages: antlr4-python3-runtime\n
+2026-03-09  16:21:33.651 | info | j2gmy15o1onjlv |    ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 79.5/79.5 kB 25.3 MB/s eta 0:00:00\n
+2026-03-09  16:21:33.651 | info | j2gmy15o1onjlv | Downloading omegaconf-2.3.0-py3-none-any.whl (79 kB)\n
+2026-03-09  16:21:33.651 | info | j2gmy15o1onjlv | Requirement already satisfied: PyYAML>=5.1.0 in /usr/local/lib/python3.10/dist-packages (from omegaconf) (6.0.1)\n
+2026-03-09  16:21:33.651 | info | j2gmy15o1onjlv |   Preparing metadata (setup.py): finished with status 'done'\n
+2026-03-09  16:21:33.651 | info | j2gmy15o1onjlv |   Preparing metadata (setup.py): started\n
+2026-03-09  16:21:33.651 | info | j2gmy15o1onjlv |      ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 117.0/117.0 kB 2.1 MB/s eta 0:00:00\n
+2026-03-09  16:21:33.651 | info | j2gmy15o1onjlv |   Downloading antlr4-python3-runtime-4.9.3.tar.gz (117 kB)\n
+2026-03-09  16:21:33.651 | info | j2gmy15o1onjlv | Collecting antlr4-python3-runtime==4.9.* (from omegaconf)\n
+2026-03-09  16:21:33.651 | info | j2gmy15o1onjlv |   Downloading omegaconf-2.3.0-py3-none-any.whl.metadata (3.9 kB)\n
+2026-03-09  16:21:32.104 | info | j2gmy15o1onjlv | Collecting omegaconf\n
+2026-03-09  16:21:32.104 | info | j2gmy15o1onjlv | [notice] To update, run: python -m pip install --upgrade pip\n
+2026-03-09  16:21:32.104 | info | j2gmy15o1onjlv | [notice] A new release of pip is available: 23.3.1 -> 26.0.1\n
+2026-03-09  16:21:32.103 | info | j2gmy15o1onjlv | \n
+2026-03-09  16:21:32.103 | warning | j2gmy15o1onjlv | WARNING: Running pip as the 'root' user can result in broken permissions and conflicting behaviour with the system package manager. It is recommended to use a virtual environment instead: https://pip.pypa.io/warnings/venv\n
+2026-03-09  16:21:32.103 | info | j2gmy15o1onjlv | [31m[1mrequirements:[0m Ultralytics requirement ['omegaconf'] not found, attempting AutoUpdate...\n
+2026-03-09  16:21:32.103 | info | j2gmy15o1onjlv | Recommend fixes are to train a new model using the latest 'ultralytics' package or to run a command with an official YOLOv8 model, i.e. 'yolo predict model=yolov8n.pt'\n
+2026-03-09  16:21:32.103 | info | j2gmy15o1onjlv | AutoInstall will run now for 'omegaconf' but this feature will be removed in the future.\n
+2026-03-09  16:21:32.103 | warning | j2gmy15o1onjlv | WARNING ⚠️ /workspace/models/yolov8x_person_face.pt appears to require 'omegaconf', which is not in ultralytics requirements.\n
+2026-03-09  16:21:32.103 | info | j2gmy15o1onjlv | Started.
+2026-03-09  16:21:32.103 | info | j2gmy15o1onjlv | Jobs in progress: 1
+2026-03-09  16:21:32.103 | info | j2gmy15o1onjlv | Jobs in queue: 1
+2026-03-09  16:21:32.103 | info | j2gmy15o1onjlv | --- Starting Serverless Worker |  Version 1.8.1 ---\n
+2026-03-09  16:21:32.103 | info | j2gmy15o1onjlv | font_manager.py     :1639 2026-03-09 20:21:26,962 generated new fontManager\n
+2026-03-09  16:21:32.103 | info | j2gmy15o1onjlv |   device: torch.device = torch.device(torch._C._get_default_device()),  # torch.device('cpu'),\n
+2026-03-09  16:21:32.103 | info | j2gmy15o1onjlv | /usr/local/lib/python3.10/dist-packages/torch/nn/modules/transformer.py:20: UserWarning: Failed to initialize NumPy: _ARRAY_API not found (Triggered internally at ../torch/csrc/utils/tensor_numpy.cpp:84.)\n
+2026-03-09  16:21:32.103 | info | j2gmy15o1onjlv |     device: torch.device = torch.device(torch._C._get_default_device()),  # torch.device('cpu'),\n
+2026-03-09  16:21:32.103 | info | j2gmy15o1onjlv |   File "/usr/local/lib/python3.10/dist-packages/torch/nn/modules/transformer.py", line 20, in <module>\n
+2026-03-09  16:21:32.103 | info | j2gmy15o1onjlv |     from .transformer import TransformerEncoder, TransformerDecoder, \\n
+2026-03-09  16:21:32.103 | info | j2gmy15o1onjlv |   File "/usr/local/lib/python3.10/dist-packages/torch/nn/modules/__init__.py", line 35, in <module>\n
+2026-03-09  16:21:32.103 | info | j2gmy15o1onjlv |     from .modules import *  # noqa: F403\n
+2026-03-09  16:21:32.103 | info | j2gmy15o1onjlv |   File "/usr/local/lib/python3.10/dist-packages/torch/nn/__init__.py", line 1, in <module>\n
+2026-03-09  16:21:32.103 | info | j2gmy15o1onjlv |     import torch.nn.functional as F\n
+2026-03-09  16:21:32.103 | info | j2gmy15o1onjlv |   File "/usr/local/lib/python3.10/dist-packages/torch/functional.py", line 7, in <module>\n
+2026-03-09  16:21:32.103 | info | j2gmy15o1onjlv |     from .functional import *  # noqa: F403\n
+2026-03-09  16:21:32.103 | info | j2gmy15o1onjlv |   File "/usr/local/lib/python3.10/dist-packages/torch/__init__.py", line 1382, in <module>\n
+2026-03-09  16:21:32.103 | info | j2gmy15o1onjlv |     import torch\n
+2026-03-09  16:21:32.103 | info | j2gmy15o1onjlv |   File "/usr/local/lib/python3.10/dist-packages/mivolo/model/yolo_detector.py", line 6, in <module>\n
+2026-03-09  16:21:32.103 | info | j2gmy15o1onjlv |     from mivolo.model.yolo_detector import Detector\n
+2026-03-09  16:21:32.103 | info | j2gmy15o1onjlv |   File "/workspace/src/models/age.py", line 16, in <module>\n
+2026-03-09  16:21:32.103 | info | j2gmy15o1onjlv |     from .models.age import estimate_age\n
+2026-03-09  16:21:32.103 | info | j2gmy15o1onjlv |   File "/workspace/src/pipeline.py", line 20, in <module>\n
+2026-03-09  16:21:32.103 | info | j2gmy15o1onjlv |     from .pipeline import verify_age\n
+2026-03-09  16:21:32.103 | info | j2gmy15o1onjlv |   File "/workspace/src/handler.py", line 7, in <module>\n
+2026-03-09  16:21:32.103 | info | j2gmy15o1onjlv |     exec(code, run_globals)\n
+2026-03-09  16:21:32.103 | info | j2gmy15o1onjlv |   File "/usr/lib/python3.10/runpy.py", line 86, in _run_code\n
+2026-03-09  16:21:32.103 | info | j2gmy15o1onjlv |     return _run_code(code, main_globals, None,\n
+2026-03-09  16:21:32.103 | info | j2gmy15o1onjlv | Traceback (most recent call last):  File "/usr/lib/python3.10/runpy.py", line 196, in _run_module_as_main\n
+2026-03-09  16:21:32.103 | info | j2gmy15o1onjlv | \n
+2026-03-09  16:21:32.103 | info | j2gmy15o1onjlv | We expect that some modules will need time to support NumPy 2.\n
+2026-03-09  16:21:32.103 | info | j2gmy15o1onjlv | downgrade to 'numpy<2' or try to upgrade the affected module.\n
+2026-03-09  16:21:32.103 | info | j2gmy15o1onjlv | If you are a user of the module, the easiest solution will be to\n
+2026-03-09  16:21:32.103 | info | j2gmy15o1onjlv | \n
+2026-03-09  16:21:32.103 | info | j2gmy15o1onjlv | Some module may need to rebuild instead e.g. with 'pybind11>=2.12'.\n
+2026-03-09  16:21:32.103 | info | j2gmy15o1onjlv | versions of NumPy, modules must be compiled with NumPy 2.0.\n
+2026-03-09  16:21:32.103 | info | j2gmy15o1onjlv | NumPy 2.2.6 as it may crash. To support both 1.x and 2.x\n
+2026-03-09  16:21:32.102 | info | j2gmy15o1onjlv | A module that was compiled using NumPy 1.x cannot be run in\n
+2026-03-09  16:21:32.102 | info | j2gmy15o1onjlv | \n
+2026-03-09  16:21:32.102 | info | j2gmy15o1onjlv | \n
+2026-03-09  16:21:32.102 | info | j2gmy15o1onjlv | A copy of this license is made available in this container at /NGC-DL-CONTAINER-LICENSE for your convenience.\n
+2026-03-09  16:21:32.102 | info | j2gmy15o1onjlv | \n
+2026-03-09  16:21:32.102 | info | j2gmy15o1onjlv | https://developer.nvidia.com/ngc/nvidia-deep-learning-container-license\n
+2026-03-09  16:21:32.102 | info | j2gmy15o1onjlv | By pulling and using the container, you accept the terms and conditions of this license:\n
+2026-03-09  16:21:32.102 | info | j2gmy15o1onjlv | This container image and its contents are governed by the NVIDIA Deep Learning Container License.\n
+2026-03-09  16:21:32.102 | info | j2gmy15o1onjlv | \n
+2026-03-09  16:21:32.102 | info | j2gmy15o1onjlv | Container image Copyright (c) 2016-2023, NVIDIA CORPORATION & AFFILIATES. All rights reserved.\n
+2026-03-09  16:21:32.102 | info | j2gmy15o1onjlv | \n
+2026-03-09  16:21:32.102 | info | j2gmy15o1onjlv | CUDA Version 11.8.0\n
+2026-03-09  16:21:32.102 | info | j2gmy15o1onjlv | \n
+2026-03-09  16:21:32.102 | info | j2gmy15o1onjlv | ==========\n
+2026-03-09  16:21:32.102 | info | j2gmy15o1onjlv | == CUDA ==\n
+2026-03-09  16:21:32.102 | info | j2gmy15o1onjlv | ==========\n
+2026-03-09  16:21:32.102 | info | j2gmy15o1onjlv | \n

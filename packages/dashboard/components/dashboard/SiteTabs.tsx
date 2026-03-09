@@ -315,9 +315,11 @@ export function SiteTabs({
   const [tab, setTab] = useState<TabId>(initialTab);
   const [currentSite, setCurrentSite] = useState(site);
 
+  const apiBase = process.env.NEXT_PUBLIC_API_BASE_URL ?? "https://agegate-api-UNKNOWN.run.app";
+  const widgetUrl = "https://storage.googleapis.com/agegate-mvp-widget-cdn/v1/widget.js";
   const embedSnippet = useMemo(() => {
-    return `<script src="https://cdn.agegate.example/widget.js" data-site-key="${currentSite.siteKey}"></script>`;
-  }, [currentSite.siteKey]);
+    return `<script src="${widgetUrl}" data-site-key="${currentSite.siteKey}" data-api-base-path="${apiBase}/api/session"></script>`;
+  }, [currentSite.siteKey, apiBase]);
 
   return (
     <div className="column">

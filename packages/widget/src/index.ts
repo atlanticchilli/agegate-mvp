@@ -91,13 +91,14 @@ function readWidgetConfig(): WidgetConfig | null {
     return null;
   }
 
+  const apiBasePath = readDataAttribute(script, "apiBasePath") ?? "/api/session";
   return {
     siteKey,
     theme: parseTheme(readDataAttribute(script, "theme")),
     accentColor: readDataAttribute(script, "accentColor") ?? DEFAULT_ACCENT_COLOR,
     position: parsePosition(readDataAttribute(script, "position")),
     logoUrl: readDataAttribute(script, "logoUrl") ?? undefined,
-    apiBasePath: "/api/session"
+    apiBasePath
   };
 }
 

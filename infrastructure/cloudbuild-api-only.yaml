@@ -1,0 +1,66 @@
+# API-only deploy - use when only API changed (~5 min vs ~15 min)
+# Use: gcloud builds submit --config=infrastructure/cloudbuild-api-only.yaml --substitutions=SHORT_SHA=xxx .
+
+substitutions:
+  _PROJECT_ID: agegate-mvp
+  _REGION: us-central1
+  _REPOSITORY: agegate-images
+  _API_SERVICE: agegate-api
+
+options:
+  logging: CLOUD_LOGGING_ONLY
+  machineType: E2_HIGHCPU_8
+
+steps:
+  - id: install-deps
+    name: gcr.io/cloud-builders/npm
+    entrypoint: bash
+    args: [-lc, "npm ci"]
+
+  - id: build-shared
+    name: gcr.io/cloud-builders/npm
+    waitFor: [install-deps]
+    entrypoint: bash
+    args: [-lc, "npm run build --workspace=packages/shared"]
+
+  - id: build-api
+    name: gcr.io/cloud-builders/docker
+    waitFor: [build-shared]
+    entrypoint: bash
+    args:
+      - -lc
+      - |
+        CACHE_IMG="${_REGION}-docker.pkg.dev/${_PROJECT_ID}/${_REPOSITORY}/api:latest"
+        docker pull "$${CACHE_IMG}" || true
+        docker build -f packages/api/Dockerfile --cache-from "$${CACHE_IMG}" \
+          -t ${_REGION}-docker.pkg.dev/${_PROJECT_ID}/${_REPOSITORY}/api:${SHORT_SHA} \
+          -t ${_REGION}-docker.pkg.dev/${_PROJECT_ID}/${_REPOSITORY}/api:latest .
+
+  - id: push-api
+    name: gcr.io/cloud-builders/docker
+    waitFor: [build-api]
+    entrypoint: bash
+    args:
+      - -lc
+      - |
+        docker push ${_REGION}-docker.pkg.dev/${_PROJECT_ID}/${_REPOSITORY}/api:${SHORT_SHA}
+        docker push ${_REGION}-docker.pkg.dev/${_PROJECT_ID}/${_REPOSITORY}/api:latest
+
+  - id: deploy-api
+    name: gcr.io/google.com/cloudsdktool/cloud-sdk
+    waitFor: [push-api]
+    entrypoint: gcloud
+    args:
+      - run
+      - deploy
+      - ${_API_SERVICE}
+      - --project=${_PROJECT_ID}
+      - --region=${_REGION}
+      - --platform=managed
+      - --allow-unauthenticated
+      - --image=${_REGION}-docker.pkg.dev/${_PROJECT_ID}/${_REPOSITORY}/api:${SHORT_SHA}
+      - --quiet
+
+images:
+  - ${_REGION}-docker.pkg.dev/${_PROJECT_ID}/${_REPOSITORY}/api:${SHORT_SHA}
+  - ${_REGION}-docker.pkg.dev/${_PROJECT_ID}/${_REPOSITORY}/api:latest
