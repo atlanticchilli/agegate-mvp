@@ -1,0 +1,73 @@
+import type { ProviderId } from "./types";
+
+export const JURISDICTION_EU = "EU";
+export const JURISDICTION_GB = "GB";
+export const JURISDICTION_AU = "AU";
+
+export const PROVIDER_IDS: ProviderId[] = ["verifymyage", "openage", "mock", "selfie"];
+export const REQUIRED_DEVELOPMENT_PROVIDER: ProviderId = "mock";
+
+export const EU_MEMBER_COUNTRY_CODES: string[] = [
+  "AT",
+  "BE",
+  "BG",
+  "HR",
+  "CY",
+  "CZ",
+  "DK",
+  "EE",
+  "FI",
+  "FR",
+  "DE",
+  "EL",
+  "GR",
+  "HU",
+  "IE",
+  "IT",
+  "LV",
+  "LT",
+  "LU",
+  "MT",
+  "NL",
+  "PL",
+  "PT",
+  "RO",
+  "SK",
+  "SI",
+  "ES",
+  "SE"
+];
+
+export const COUNTRY_TO_JURISDICTION_MAP: Record<string, string> = {
+  GB: JURISDICTION_GB,
+  AU: JURISDICTION_AU,
+  EU: JURISDICTION_EU,
+  AT: JURISDICTION_EU,
+  BE: JURISDICTION_EU,
+  BG: JURISDICTION_EU,
+  HR: JURISDICTION_EU,
+  CY: JURISDICTION_EU,
+  CZ: JURISDICTION_EU,
+  DK: JURISDICTION_EU,
+  EE: JURISDICTION_EU,
+  FI: JURISDICTION_EU,
+  FR: JURISDICTION_EU,
+  DE: JURISDICTION_EU,
+  EL: JURISDICTION_EU,
+  GR: JURISDICTION_EU,
+  HU: JURISDICTION_EU,
+  IE: JURISDICTION_EU,
+  IT: JURISDICTION_EU,
+  LV: JURISDICTION_EU,
+  LT: JURISDICTION_EU,
+  LU: JURISDICTION_EU,
+  MT: JURISDICTION_EU,
+  NL: JURISDICTION_EU,
+  PL: JURISDICTION_EU,
+  PT: JURISDICTION_EU,
+  RO: JURISDICTION_EU,
+  SK: JURISDICTION_EU,
+  SI: JURISDICTION_EU,
+  ES: JURISDICTION_EU,
+  SE: JURISDICTION_EU
+};

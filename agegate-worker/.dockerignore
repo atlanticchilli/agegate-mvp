@@ -1,0 +1,11 @@
+__pycache__
+*.pyc
+.git
+.gitignore
+*.md
+!README.md
+models
+Silent-Face-Anti-Spoofing
+.env
+.venv
+venv

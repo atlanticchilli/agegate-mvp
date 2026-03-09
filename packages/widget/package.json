@@ -1,0 +1,19 @@
+{
+  "name": "@agegate/widget",
+  "version": "0.1.0",
+  "private": true,
+  "main": "dist/widget.js",
+  "types": "dist/types/index.d.ts",
+  "scripts": {
+    "dev": "esbuild src/index.ts --bundle --format=iife --global-name=AgeGateWidget --target=es2018 --outfile=dist/widget.js --watch",
+    "build": "esbuild src/index.ts --bundle --format=iife --global-name=AgeGateWidget --target=es2018 --outfile=dist/widget.js && esbuild src/index.ts --bundle --format=iife --global-name=AgeGateWidget --target=es2018 --minify --outfile=dist/widget.min.js && tsc -p tsconfig.json --emitDeclarationOnly",
+    "typecheck": "tsc -p tsconfig.json --noEmit",
+    "test": "tsx --test tests/session.test.ts"
+  },
+  "devDependencies": {
+    "@types/node": "^24.5.2",
+    "esbuild": "^0.25.10",
+    "tsx": "^4.20.5",
+    "typescript": "^5.9.2"
+  }
+}

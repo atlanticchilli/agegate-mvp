@@ -1,0 +1,26 @@
+<!doctype html>
+<html>
+  <body>
+    <h1>Host Page Content</h1>
+    <p>This should be blocked by the AgeGate modal.</p>
+
+    <script>
+      const __origFetch = window.fetch.bind(window);
+      window.fetch = (input, init) => {
+        const url = typeof input === "string" ? input : input.url;
+        if (url.startsWith("/api/")) {
+          return __origFetch(`http://127.0.0.1:3001${url}`, init);
+        }
+        return __origFetch(input, init);
+      };
+    </script>
+
+
+    <script
+      src="/packages/widget/dist/widget.js"
+      data-site-key="site_6466ecf767624082a0c50c42"
+      data-theme="light"
+      data-accent-color="#4A90D9">
+    </script>
+  </body>
+</html>

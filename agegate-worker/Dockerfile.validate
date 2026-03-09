@@ -1,0 +1,7 @@
+# Minimal image for dependency validation - has git + setuptools for mivolo
+FROM python:3.10-slim
+RUN apt-get update && apt-get install -y --no-install-recommends git \
+    && rm -rf /var/lib/apt/lists/*
+# setuptools<74 has pkg_resources (mivolo setup.py imports it)
+RUN pip install --no-cache-dir -U pip "setuptools<74"
+# ~80MB total - builds in seconds

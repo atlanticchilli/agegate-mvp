@@ -1,0 +1,155 @@
+substitutions:
+  _PROJECT_ID: agegate-mvp
+  _REGION: us-central1
+  _REPOSITORY: agegate-images
+  _API_SERVICE: agegate-api
+  _DASHBOARD_SERVICE: agegate-dashboard
+  _WIDGET_BUCKET: agegate-mvp-widget-cdn
+  _WIDGET_OBJECT: v1/widget.js
+  _CDN_INVALIDATION_COMMAND: "echo \"TODO: replace with gcloud compute url-maps invalidate-cdn-cache ...\""
+
+options:
+  logging: CLOUD_LOGGING_ONLY
+
+steps:
+  - id: install-deps
+    name: gcr.io/cloud-builders/npm
+    entrypoint: bash
+    args:
+      - -lc
+      - |
+        set -euo pipefail
+        npm ci
+
+  - id: build-shared
+    name: gcr.io/cloud-builders/npm
+    entrypoint: bash
+    args:
+      - -lc
+      - |
+        set -euo pipefail
+        if [ -f "packages/shared/package.json" ]; then
+          npm run build --workspace=packages/shared
+        else
+          echo "packages/shared not present yet; skipping shared build placeholder."
+        fi
+
+  - id: build-api-image
+    name: gcr.io/cloud-builders/docker
+    entrypoint: bash
+    args:
+      - -lc
+      - |
+        set -euo pipefail
+        docker build \
+          -f packages/api/Dockerfile \
+          -t ${_REGION}-docker.pkg.dev/${_PROJECT_ID}/${_REPOSITORY}/api:${SHORT_SHA} \
+          -t ${_REGION}-docker.pkg.dev/${_PROJECT_ID}/${_REPOSITORY}/api:latest \
+          .
+
+  - id: push-api-image
+    name: gcr.io/cloud-builders/docker
+    args:
+      - push
+      - ${_REGION}-docker.pkg.dev/${_PROJECT_ID}/${_REPOSITORY}/api:${SHORT_SHA}
+
+  - id: push-api-image-latest
+    name: gcr.io/cloud-builders/docker
+    args:
+      - push
+      - ${_REGION}-docker.pkg.dev/${_PROJECT_ID}/${_REPOSITORY}/api:latest
+
+  - id: deploy-api
+    name: gcr.io/google.com/cloudsdktool/cloud-sdk
+    entrypoint: bash
+    args:
+      - -lc
+      - |
+        set -euo pipefail
+        gcloud run deploy "${_API_SERVICE}" \
+          --project "${_PROJECT_ID}" \
+          --region "${_REGION}" \
+          --platform managed \
+          --allow-unauthenticated \
+          --image "${_REGION}-docker.pkg.dev/${_PROJECT_ID}/${_REPOSITORY}/api:${SHORT_SHA}"
+
+  - id: build-dashboard-image
+    name: gcr.io/cloud-builders/docker
+    entrypoint: bash
+    args:
+      - -lc
+      - |
+        set -euo pipefail
+        docker build \
+          -f packages/dashboard/Dockerfile \
+          -t ${_REGION}-docker.pkg.dev/${_PROJECT_ID}/${_REPOSITORY}/dashboard:${SHORT_SHA} \
+          -t ${_REGION}-docker.pkg.dev/${_PROJECT_ID}/${_REPOSITORY}/dashboard:latest \
+          .
+
+  - id: push-dashboard-image
+    name: gcr.io/cloud-builders/docker
+    args:
+      - push
+      - ${_REGION}-docker.pkg.dev/${_PROJECT_ID}/${_REPOSITORY}/dashboard:${SHORT_SHA}
+
+  - id: push-dashboard-image-latest
+    name: gcr.io/cloud-builders/docker
+    args:
+      - push
+      - ${_REGION}-docker.pkg.dev/${_PROJECT_ID}/${_REPOSITORY}/dashboard:latest
+
+  - id: deploy-dashboard
+    name: gcr.io/google.com/cloudsdktool/cloud-sdk
+    entrypoint: bash
+    args:
+      - -lc
+      - |
+        set -euo pipefail
+        gcloud run deploy "${_DASHBOARD_SERVICE}" \
+          --project "${_PROJECT_ID}" \
+          --region "${_REGION}" \
+          --platform managed \
+          --allow-unauthenticated \
+          --image "${_REGION}-docker.pkg.dev/${_PROJECT_ID}/${_REPOSITORY}/dashboard:${SHORT_SHA}"
+
+  - id: build-widget
+    name: gcr.io/cloud-builders/npm
+    entrypoint: bash
+    args:
+      - -lc
+      - |
+        set -euo pipefail
+        if [ -f "packages/widget/package.json" ]; then
+          npm run build --workspace=packages/widget
+        else
+          echo "packages/widget not present yet; skipping widget build placeholder."
+        fi
+
+  - id: upload-widget
+    name: gcr.io/google.com/cloudsdktool/cloud-sdk
+    entrypoint: bash
+    args:
+      - -lc
+      - |
+        set -euo pipefail
+        if [ -f "packages/widget/dist/widget.js" ]; then
+          gcloud storage cp packages/widget/dist/widget.js \
+            gs://${_WIDGET_BUCKET}/${_WIDGET_OBJECT}
+        else
+          echo "packages/widget/dist/widget.js not found; upload skipped (placeholder until widget build output exists)."
+        fi
+
+  - id: invalidate-cdn-cache-placeholder
+    name: gcr.io/google.com/cloudsdktool/cloud-sdk
+    entrypoint: bash
+    args:
+      - -lc
+      - |
+        set -euo pipefail
+        ${_CDN_INVALIDATION_COMMAND}
+
+images:
+  - ${_REGION}-docker.pkg.dev/${_PROJECT_ID}/${_REPOSITORY}/api:${SHORT_SHA}
+  - ${_REGION}-docker.pkg.dev/${_PROJECT_ID}/${_REPOSITORY}/api:latest
+  - ${_REGION}-docker.pkg.dev/${_PROJECT_ID}/${_REPOSITORY}/dashboard:${SHORT_SHA}
+  - ${_REGION}-docker.pkg.dev/${_PROJECT_ID}/${_REPOSITORY}/dashboard:latest

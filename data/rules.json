@@ -1,0 +1,110 @@
+{
+  "GB": {
+    "adult_content": {
+      "regulator": "Ofcom",
+      "regulation": "Online Safety Act 2023, Part 5",
+      "enforcementDate": "2025-01-17",
+      "approvedMethods": [
+        {
+          "method": "email_age_estimation",
+          "displayName": "Verify via email",
+          "providers": ["verifymyage", "mock"],
+          "regulatorStatus": "capable_of_highly_effective"
+        },
+        {
+          "method": "facial_age_estimation",
+          "displayName": "Verify via selfie",
+          "providers": ["verifymyage", "selfie", "mock"],
+          "regulatorStatus": "capable_of_highly_effective"
+        },
+        {
+          "method": "photo_id",
+          "displayName": "Verify via photo ID",
+          "providers": ["verifymyage", "mock"],
+          "regulatorStatus": "capable_of_highly_effective"
+        },
+        {
+          "method": "credit_card",
+          "displayName": "Verify via credit card",
+          "providers": ["verifymyage", "mock"],
+          "regulatorStatus": "capable_of_highly_effective"
+        },
+        {
+          "method": "mobile_operator",
+          "displayName": "Verify via mobile number",
+          "providers": ["verifymyage", "mock"],
+          "regulatorStatus": "capable_of_highly_effective"
+        },
+        {
+          "method": "reusable_age_token",
+          "displayName": "Verify via AgeKey",
+          "providers": ["openage", "mock"],
+          "regulatorStatus": "capable_of_highly_effective"
+        }
+      ],
+      "rejectedMethods": ["self_declaration", "debit_card", "warnings_disclaimers"]
+    }
+  },
+  "AU": {
+    "adult_content": {
+      "regulator": "eSafety Commissioner",
+      "regulation": "Online Safety Act 2021, Industry Codes",
+      "enforcementDate": "2025-12-27",
+      "approvedMethods": [
+        {
+          "method": "facial_age_estimation",
+          "displayName": "Verify via selfie",
+          "providers": ["verifymyage", "selfie", "mock"],
+          "regulatorStatus": "acceptable"
+        },
+        {
+          "method": "photo_id",
+          "displayName": "Verify via photo ID",
+          "providers": ["verifymyage", "mock"],
+          "regulatorStatus": "acceptable"
+        },
+        {
+          "method": "credit_card",
+          "displayName": "Verify via credit card",
+          "providers": ["verifymyage", "mock"],
+          "regulatorStatus": "acceptable"
+        },
+        {
+          "method": "reusable_age_token",
+          "displayName": "Verify via AgeKey",
+          "providers": ["openage", "mock"],
+          "regulatorStatus": "acceptable"
+        }
+      ],
+      "rejectedMethods": ["self_declaration"]
+    }
+  },
+  "EU": {
+    "adult_content": {
+      "regulator": "European Commission",
+      "regulation": "Digital Services Act, Article 28 Guidelines",
+      "enforcementDate": "2025-07-14",
+      "approvedMethods": [
+        {
+          "method": "photo_id",
+          "displayName": "Verify via photo ID",
+          "providers": ["verifymyage", "mock"],
+          "regulatorStatus": "recommended"
+        },
+        {
+          "method": "facial_age_estimation",
+          "displayName": "Verify via selfie",
+          "providers": ["verifymyage", "selfie", "mock"],
+          "regulatorStatus": "recommended_with_requirements"
+        },
+        {
+          "method": "reusable_age_token",
+          "displayName": "Verify via AgeKey",
+          "providers": ["openage", "mock"],
+          "regulatorStatus": "recommended"
+        }
+      ],
+      "rejectedMethods": ["self_declaration"]
+    }
+  }
+}

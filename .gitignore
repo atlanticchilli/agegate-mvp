@@ -1,0 +1,10 @@
+node_modules/
+dist/
+.next/
+*.mmdb
+.env
+.env.local
+.firebase/
+*-debug.log
+serviceAccountKey.json
+tt

@@ -1,0 +1,32 @@
+{
+  "name": "@agegate/api",
+  "version": "0.1.0",
+  "private": true,
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "scripts": {
+    "dev": "tsx watch src/index.ts",
+    "build": "tsc -p tsconfig.json",
+    "start": "node dist/index.js",
+    "typecheck": "tsc -p tsconfig.json --noEmit",
+    "test": "firebase emulators:exec --config ../../firebase.api-test.json --only auth,firestore \"tsx --test tests/integration.test.ts\""
+  },
+  "dependencies": {
+    "@agegate/shared": "0.1.0",
+    "@google-cloud/secret-manager": "^6.1.0",
+    "@maxmind/geoip2-node": "^6.1.0",
+    "cors": "^2.8.5",
+    "express": "^5.1.0",
+    "firebase-admin": "^13.5.0"
+  },
+  "devDependencies": {
+    "@types/cors": "^2.8.19",
+    "@types/express": "^5.0.3",
+    "@types/node": "^24.5.2",
+    "@types/supertest": "^6.0.3",
+    "firebase-tools": "^14.20.0",
+    "supertest": "^7.1.4",
+    "tsx": "^4.20.5",
+    "typescript": "^5.9.2"
+  }
+}

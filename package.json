@@ -1,0 +1,23 @@
+{
+  "name": "agegate",
+  "version": "0.1.0",
+  "private": true,
+  "workspaces": [
+    "packages/*"
+  ],
+  "scripts": {
+    "dev:api": "npm run dev --workspace=packages/api",
+    "dev:dashboard": "npm run dev --workspace=packages/dashboard",
+    "dev:widget": "npm run dev --workspace=packages/widget",
+    "emulators": "firebase emulators:start",
+    "build:shared": "npm run build --workspace=packages/shared",
+    "build:api": "npm run build --workspace=packages/api",
+    "typecheck:shared": "npm run typecheck --workspace=packages/shared",
+    "typecheck:api": "npm run typecheck --workspace=packages/api",
+    "test:shared": "npm run test --workspace=packages/shared",
+    "test:api": "npm run test --workspace=packages/api"
+  },
+  "devDependencies": {
+    "typescript": "^5.9.2"
+  }
+}
