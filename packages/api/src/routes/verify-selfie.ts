@@ -12,6 +12,7 @@ interface RunPodOutput {
   liveness_score?: number;
   error?: string;
   error_code?: string;
+  error_detail?: string;
   [key: string]: unknown;
 }
 
@@ -74,6 +75,9 @@ async function handleVerifySelfie(
     return;
   }
 
+  // Strip data URL prefix if present (e.g. data:image/jpeg;base64,)
+  const imageBase64 = image.includes(",") ? image.split(",")[1] ?? image : image;
+
   const session = await getVerificationBySessionId(sessionId);
   if (!session) {
     res.status(404).json({
@@ -112,7 +116,7 @@ async function handleVerifySelfie(
     return;
   }
 
-  const input: Record<string, unknown> = { image };
+  const input: Record<string, unknown> = { image: imageBase64 };
   if (typeof min_age === "number") {
     input.min_age = min_age;
   }
@@ -221,16 +225,20 @@ async function handleVerifySelfie(
     });
   }
 
+  const errorMsg = output?.error ?? runPodResponse.error;
+  const errorCode = output?.error_code ?? (runPodResponse.error ? "RUNPOD_JOB_FAILED" : undefined);
+
   const response: Record<string, unknown> = {
     pass,
     ...(token ? { token } : {}),
-    ...(output?.error ? { error: output.error } : {}),
-    ...(output?.error_code ? { error_code: output.error_code, errorCode: output.error_code } : {}),
+    ...(errorMsg ? { error: errorMsg } : pass ? {} : { error: "Verification did not pass" }),
+    ...(errorCode ? { error_code: errorCode, errorCode } : {}),
     ...(typeof output?.estimated_age === "number" ? { estimated_age: output.estimated_age } : {}),
-    ...(typeof output?.liveness_score === "number" ? { liveness_score: output.liveness_score } : {})
+    ...(typeof output?.liveness_score === "number" ? { liveness_score: output.liveness_score } : {}),
+    ...(output?.error_detail ? { error_detail: output.error_detail } : {})
   };
 
   res.json(response);
-});
+}
 
 export default router;

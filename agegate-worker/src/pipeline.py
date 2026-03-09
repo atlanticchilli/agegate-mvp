@@ -67,10 +67,8 @@ def verify_age(
         image = _decode_image(image_base64)
     except Exception as e:
         err = str(e).lower()
-        if "invalid" in err or "decode" in err:
-            result["error"] = "invalid_image"
-        else:
-            result["error"] = "invalid_image"
+        result["error"] = "invalid_image"
+        result["error_detail"] = f"{type(e).__name__}: {e}"  # For debugging; client can log
         return result
 
     face_bbox, person_bbox = detect_faces(image, YOLO_WEIGHTS, device=DEVICE)

@@ -16,7 +16,7 @@ WIDGET_OBJECT="${WIDGET_OBJECT:-v1/widget.js}"
 TAG="${TAG:-$(date +%Y%m%d-%H%M%S)}"
 
 # RunPod: set these so the API can call the worker (get key from runpod.io/console/user/settings)
-RUNPOD_ENDPOINT_ID="${RUNPOD_ENDPOINT_ID:-}"
+RUNPOD_ENDPOINT_ID="${RUNPOD_ENDPOINT_ID:-osnbq65qwsjmf1}"
 RUNPOD_API_KEY="${RUNPOD_API_KEY:-}"
 
 API_IMAGE="${REGION}-docker.pkg.dev/${PROJECT_ID}/${REPOSITORY}/api:${TAG}"

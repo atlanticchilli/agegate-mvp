@@ -148,7 +148,8 @@ export function showSelfieCapture(options: SelfieCaptureOptions): () => void {
     canvas.height = video.videoHeight;
     ctx.drawImage(video, 0, 0);
     const dataUrl = canvas.toDataURL("image/jpeg", 0.9);
-    const base64 = dataUrl.replace(/^data:image\/jpeg;base64,/, "");
+    // Extract base64 only - browsers may fall back to PNG if JPEG unsupported
+    const base64 = dataUrl.includes(",") ? dataUrl.split(",")[1] ?? dataUrl : dataUrl;
 
     cleanup();
     onCapture({ imageBase64: base64 });

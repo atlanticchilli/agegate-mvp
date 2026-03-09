@@ -58,7 +58,7 @@ After deploying the agegate-worker to RunPod, verify it's working:
 ./infrastructure/test-runpod.sh
 
 # Test RunPod endpoint directly (bypasses API)
-RUNPOD_ENDPOINT_ID=your_endpoint_id RUNPOD_API_KEY=your_key ./infrastructure/test-runpod.sh --direct
+RUNPOD_ENDPOINT_ID=osnbq65qwsjmf1 RUNPOD_API_KEY=your_key ./infrastructure/test-runpod.sh --direct
 ```
 
 The script uses a minimal test image. You'll typically see `no_face_detected` (expected) or `pass`/`fail` with a real face. A successful response means the worker is running without the NumPy error.
