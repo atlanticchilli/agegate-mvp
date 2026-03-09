@@ -7,5 +7,4 @@ dist/
 .firebase/
 *-debug.log
 serviceAccountKey.json
-/Users/aron/agegate-mvp/packages/api/agegate-mvp-firebase-adminsdk-fbsvc-298a3ed249.json
-tt
+*firebase-adminsdk*.json
